@@ -16,6 +16,8 @@ settings.z0 = 7;                                                                
 settings.lrampa = 4.9;                                                              %[m] LaunchPad route (distance from ground of the first hook)
 settings.lat0 = 44.519272;                                                          % Launchpad latitude
 settings.lon0 = 11.642333;                                                          % Launchpad longitude
+% settings.lat0 = 41.809017;                                                          % Launchpad latitude
+% settings.lon0 = 14.054264;   
 settings.terrain = false;
 if settings.terrain
     settings.funZ = funZ_gen('zdata.mat', settings.lat0, settings.lon0, true, 'xy');    % Altitude map computation
