@@ -32,18 +32,8 @@ if settings.wind.model && settings.wind.input
     error('Both wind model and input wind are true, select just one of them')
 end
 
-if settings.wind.HourMin ~= settings.wind.HourMax || settings.wind.HourMin ~= settings.wind.HourMax
-    error('In standard simulations with the wind model the day and the hour of launch must be unique, check config.m')
-end
-
-if settings.OMEGAmin ~= settings.OMEGAmax || settings.PHImin ~= settings.PHImax 
-    error('In a single simulation the launchpad configuration has to be unique, check config.m')
-end
 
 %% STARTING CONDITIONS
-% Attitude
-settings.OMEGA = settings.OMEGAmin;
-settings.PHI = settings.PHImin;
 
 if settings.upwind
     settings.PHI = mod(Azw + pi, 2*pi);

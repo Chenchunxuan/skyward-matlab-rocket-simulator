@@ -32,14 +32,6 @@ if settings.wind.model && settings.wind.input
     error('Both wind model and input wind are true, select just one of them')
 end
 
-if settings.wind.HourMin ~= settings.wind.HourMax || settings.wind.HourMin ~= settings.wind.HourMax
-    error('In standard simulations with the wind model the day and the hour of launch must be unique, check config.m')
-end
-
-if settings.OMEGAmin ~= settings.OMEGAmax || settings.PHImin ~= settings.PHImax
-    error('In a single simulation the launchpad configuration has to be unique, check config.m')
-end
-
 if settings.para(settings.Npara).z_cut ~= 0 
     error('The landing will be not achived, check the final altitude of the last parachute in config.m')
 end
@@ -86,20 +78,13 @@ X0 = [0 0 0]';
 V0 = [0 0 0]';
 W0 = [0 0 0]';
 
-settings.OMEGA = settings.OMEGAmin;
-
 % Attitude
-if settings.wind.input || settings.wind.model
-    settings.PHI = settings.PHImin;
-else
-    
-    if settings.upwind
-        settings.PHI = mod(Azw + pi, 2*pi);
-    else
-        settings.PHI = settings.PHImin + rand*(settings.PHImax - settings.PHImin);
-    end
+
+if settings.upwind
+    settings.PHI = mod(Azw + pi, 2*pi);
     
 end
+
 Q0 = angle2quat(settings.PHI, settings.OMEGA, 0*pi/180, 'ZYX')';
 
 %% ASCENT
